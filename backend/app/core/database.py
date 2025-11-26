@@ -1,15 +1,9 @@
-from sqlalchemy import create_engine
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
-from app.core.config import settings
+# This file is not used - the application uses DynamoDB instead of SQL
+# Kept for potential future SQL database integration
+# The DynamoDB client is in app/db/dynamodb.py
 
-engine = create_engine(settings.DATABASE_URL)
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-Base = declarative_base()
+from app.db.dynamodb import db_client
 
 def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
+    """Returns the DynamoDB client instance"""
+    return db_client

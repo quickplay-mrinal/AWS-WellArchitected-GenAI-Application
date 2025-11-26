@@ -38,12 +38,19 @@ class UserRepository:
     
     @staticmethod
     def get_user_by_username(username: str) -> Optional[Dict]:
-        # Scan for username (consider adding GSI if needed)
-        items = db_client.query_by_pk('USER#')
-        for item in items:
-            if item.get('username') == username:
-                return item
-        return None
+        # Use scan with filter for username lookup
+        # Note: For production, consider adding a GSI on username for better performance
+        try:
+            response = db_client.table.scan(
+                FilterExpression='username = :username',
+                ExpressionAttributeValues={':username': username}
+            )
+            items = response.get('Items', [])
+            return items[0] if items else None
+        except Exception as e:
+            from app.db.dynamodb import logger
+            logger.error(f"Error getting user by username: {e}")
+            return None
     
     @staticmethod
     def update_user(user_id: str, updates: Dict) -> bool:

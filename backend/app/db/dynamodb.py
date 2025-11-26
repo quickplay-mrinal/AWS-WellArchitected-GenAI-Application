@@ -10,7 +10,7 @@ logger = logging.getLogger(__name__)
 
 class DynamoDBClient:
     def __init__(self):
-        self.dynamodb = boto3.resource('dynamodb', region_name=os.getenv('AWS_REGION', 'ap-south-1'))
+        self.dynamodb = boto3.resource('dynamodb', region_name=os.getenv('AWS_REGION', 'ap-southeast-1'))
         self.table_name = os.getenv('DYNAMODB_TABLE_NAME', 'WellArchitectedApp')
         self.table = self.dynamodb.Table(self.table_name)
     

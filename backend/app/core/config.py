@@ -8,7 +8,7 @@ class Settings(BaseSettings):
     ENVIRONMENT: str = "development"
     
     # AWS
-    AWS_REGION: str = "ap-south-1"
+    AWS_REGION: str = "ap-southeast-1"
     AWS_ACCESS_KEY_ID: str = ""
     AWS_SECRET_ACCESS_KEY: str = ""
     
