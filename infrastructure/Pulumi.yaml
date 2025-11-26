@@ -1,0 +1,3 @@
+name: wellarchitected-genai-infra
+runtime: python
+description: AWS Well-Architected GenAI App Infrastructure
