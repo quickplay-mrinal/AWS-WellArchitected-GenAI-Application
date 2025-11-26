@@ -1,6 +1,16 @@
 import axios from 'axios'
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'
+// Support runtime configuration for Docker deployments
+const getApiUrl = () => {
+  // Check if running in browser
+  if (typeof window !== 'undefined') {
+    // @ts-ignore - injected by Docker at runtime
+    return window.__RUNTIME_CONFIG__?.NEXT_PUBLIC_API_URL || process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'
+  }
+  return process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'
+}
+
+const API_URL = getApiUrl()
 
 export const api = axios.create({
   baseURL: API_URL,

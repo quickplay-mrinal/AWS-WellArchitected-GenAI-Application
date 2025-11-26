@@ -464,7 +464,7 @@ frontend_task_definition = aws.ecs.TaskDefinition(
             "essential": True,
             "portMappings": [{"containerPort": 3000, "protocol": "tcp"}],
             "environment": [
-                {"name": "NEXT_PUBLIC_API_URL", "value": f"http://{args[3]}/api"},
+                {"name": "NEXT_PUBLIC_API_URL", "value": f"http://{args[3]}"},
             ],
             "logConfiguration": {
                 "logDriver": "awslogs",
